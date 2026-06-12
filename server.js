@@ -53,6 +53,11 @@ app.post("/sos", async (req, res) => {
       from: process.env.TWILIO_PHONE_NUMBER,
       to: process.env.MY_PHONE_NUMBER
     });
+    await client.calls.create({
+  twiml: '<Response><Say>Emergency Alert. A user has triggered SOS. Please check immediately.</Say></Response>',
+  from: process.env.TWILIO_PHONE_NUMBER,
+  to: process.env.MY_PHONE_NUMBER
+});
 
     res.status(200).json({
       message: "SOS Sent Successfully"
